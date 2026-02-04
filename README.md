@@ -47,6 +47,24 @@ The extension extracts the base domain from your current URL and swaps the TLD w
 - `tabs` — Navigate to the swapped URL
 - `contextMenus` — Right-click menu options
 
+## Publishing
+
+A GitHub Action automatically publishes to Chrome Web Store when you create a release.
+
+**Setup (one-time):**
+
+1. Go to [Google Cloud Console](https://console.cloud.google.com/)
+2. Create a project and enable the **Chrome Web Store API**
+3. Create OAuth 2.0 credentials (Desktop app)
+4. Get a refresh token using [chrome-webstore-upload](https://github.com/nickytonline/chrome-webstore-upload-cli#setting-up-your-credentials)
+5. Add these repository secrets in GitHub:
+   - `EXTENSION_ID` — Your extension's ID from the Chrome Web Store
+   - `CHROME_CLIENT_ID` — OAuth client ID
+   - `CHROME_CLIENT_SECRET` — OAuth client secret
+   - `CHROME_REFRESH_TOKEN` — OAuth refresh token
+
+**To publish:** Create a new release on GitHub → Action runs automatically
+
 ## License
 
 MIT
