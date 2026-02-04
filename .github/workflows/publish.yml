@@ -1,3 +1,13 @@
+# Publishes to Chrome Web Store when a release is created.
+#
+# Required repository secrets:
+#   EXTENSION_ID        - Extension ID from Chrome Web Store
+#   CHROME_CLIENT_ID    - OAuth client ID from Google Cloud Console
+#   CHROME_CLIENT_SECRET - OAuth client secret
+#   CHROME_REFRESH_TOKEN - OAuth refresh token
+#
+# Setup: https://github.com/nickytonline/chrome-webstore-upload-cli#setting-up-your-credentials
+
 name: Publish to Chrome Web Store
 
 on:
