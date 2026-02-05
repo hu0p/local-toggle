@@ -47,6 +47,16 @@ The extension extracts the base domain from your current URL and swaps the TLD w
 - `tabs` — Navigate to the swapped URL
 - `contextMenus` — Right-click menu options
 
+## Publishing
+
+To release a new version:
+
+```bash
+gh release create v1.2.0 --title "v1.2.0" --notes "Release notes here"
+```
+
+The GitHub Action will automatically update the manifest version, package the extension, and publish to the Chrome Web Store.
+
 ## License
 
 MIT
