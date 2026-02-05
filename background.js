@@ -181,12 +181,12 @@ const handleActionClick = async (tab) => {
 chrome.runtime.onInstalled.addListener(() => {
   chrome.contextMenus.create({
     id: CONFIGURE_MENU_ID,
-    title: 'Configure settings for this domain',
+    title: chrome.i18n.getMessage('menuConfigure'),
     contexts: ['action'],
   });
   chrome.contextMenus.create({
     id: CLEAR_TLD_MENU_ID,
-    title: 'Clear saved production TLD for this domain',
+    title: chrome.i18n.getMessage('menuClearTld'),
     contexts: ['action'],
   });
 });

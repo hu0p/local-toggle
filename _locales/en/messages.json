@@ -1,0 +1,50 @@
+{
+  "extensionName": {
+    "message": "Local Toggle",
+    "description": "The name of the extension"
+  },
+  "extensionDescription": {
+    "message": "Swap between .test and production TLDs with one click",
+    "description": "The description of the extension"
+  },
+  "actionTitle": {
+    "message": "Swap TLD (.test ↔ production)",
+    "description": "Tooltip shown when hovering over the extension icon"
+  },
+  "menuConfigure": {
+    "message": "Configure settings for this domain",
+    "description": "Context menu item to open configuration"
+  },
+  "menuClearTld": {
+    "message": "Clear saved production TLD for this domain",
+    "description": "Context menu item to clear saved settings"
+  },
+  "labelProduction": {
+    "message": "Production",
+    "description": "Label for the production TLD input"
+  },
+  "labelLocal": {
+    "message": "Local",
+    "description": "Label for the local TLD input"
+  },
+  "buttonGoToProduction": {
+    "message": "Go to Production",
+    "description": "Button text when on local environment"
+  },
+  "buttonGoToLocal": {
+    "message": "Go to Local",
+    "description": "Button text when on production environment"
+  },
+  "errorProdTldRequired": {
+    "message": "Production TLD is required",
+    "description": "Error when production TLD is empty"
+  },
+  "errorLocalTldRequired": {
+    "message": "Local TLD is required",
+    "description": "Error when local TLD is empty"
+  },
+  "errorTldsMustDiffer": {
+    "message": "TLDs must be different",
+    "description": "Error when production and local TLDs are the same"
+  }
+}

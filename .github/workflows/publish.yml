@@ -26,7 +26,7 @@ jobs:
           jq --arg v "$VERSION" '.version = $v' manifest.json > manifest.tmp && mv manifest.tmp manifest.json
 
       - name: Create zip
-        run: zip -r local-toggle.zip manifest.json background.js popup.html popup.js icon-128.png
+        run: zip -r local-toggle.zip manifest.json background.js popup.html popup.js icon-128.png _locales
 
       - name: Upload to Chrome Web Store
         uses: mnao305/chrome-extension-upload@v5.0.0

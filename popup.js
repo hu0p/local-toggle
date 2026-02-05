@@ -54,7 +54,13 @@ const navigateAndClose = async (tabId, newUrl) => {
   window.close();
 };
 
+const i18n = (key) => chrome.i18n.getMessage(key);
+
 const init = async () => {
+  document.querySelectorAll('[data-i18n]').forEach((el) => {
+    el.textContent = i18n(el.dataset.i18n);
+  });
+
   const isConfigureMode = new URLSearchParams(window.location.search).has('configure');
 
   const endTabQuery = perf('chrome.tabs.query');
@@ -142,7 +148,7 @@ const init = async () => {
   localDomain.textContent = `://${domainBase}.`;
 
   const buttonLabel = document.querySelector('#button-label');
-  buttonLabel.textContent = isOnLocal ? 'Go to Production' : 'Go to Local';
+  buttonLabel.textContent = isOnLocal ? i18n('buttonGoToProduction') : i18n('buttonGoToLocal');
 
   if (prefillProdTld) {
     tldInput.value = prefillProdTld.replace(/^\./, '');
@@ -191,12 +197,12 @@ const init = async () => {
     const localTld = stripLeadingDot(rawLocalTld);
 
     if (!prodTld) {
-      showError('Production TLD is required', inputRow);
+      showError(i18n('errorProdTldRequired'), inputRow);
       return;
     }
 
     if (!localTld) {
-      showError('Local TLD is required', localInputRow);
+      showError(i18n('errorLocalTldRequired'), localInputRow);
       return;
     }
 
@@ -204,7 +210,7 @@ const init = async () => {
     const newLocalTld = `.${localTld}`;
 
     if (newProdTld === newLocalTld) {
-      showError('TLDs must be different', localInputRow);
+      showError(i18n('errorTldsMustDiffer'), localInputRow);
       return;
     }
 
