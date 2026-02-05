@@ -2,3 +2,4 @@
 *.zip
 .claude/
 client_secret*.json
+store-listing/
