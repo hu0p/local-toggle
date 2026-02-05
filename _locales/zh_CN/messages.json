@@ -1,0 +1,38 @@
+{
+  "extensionName": {
+    "message": "Local Toggle"
+  },
+  "extensionDescription": {
+    "message": "一键切换.test和生产环境TLD"
+  },
+  "actionTitle": {
+    "message": "切换TLD (.test ↔ 生产)"
+  },
+  "menuConfigure": {
+    "message": "配置此域名的设置"
+  },
+  "menuClearTld": {
+    "message": "清除此域名已保存的生产TLD"
+  },
+  "labelProduction": {
+    "message": "生产"
+  },
+  "labelLocal": {
+    "message": "本地"
+  },
+  "buttonGoToProduction": {
+    "message": "前往生产"
+  },
+  "buttonGoToLocal": {
+    "message": "前往本地"
+  },
+  "errorProdTldRequired": {
+    "message": "生产TLD为必填项"
+  },
+  "errorLocalTldRequired": {
+    "message": "本地TLD为必填项"
+  },
+  "errorTldsMustDiffer": {
+    "message": "TLD必须不同"
+  }
+}

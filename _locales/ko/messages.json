@@ -1,0 +1,38 @@
+{
+  "extensionName": {
+    "message": "Local Toggle"
+  },
+  "extensionDescription": {
+    "message": "한 번의 클릭으로 .test와 프로덕션 TLD 전환"
+  },
+  "actionTitle": {
+    "message": "TLD 전환 (.test ↔ 프로덕션)"
+  },
+  "menuConfigure": {
+    "message": "이 도메인의 설정 구성"
+  },
+  "menuClearTld": {
+    "message": "이 도메인의 저장된 프로덕션 TLD 삭제"
+  },
+  "labelProduction": {
+    "message": "프로덕션"
+  },
+  "labelLocal": {
+    "message": "로컬"
+  },
+  "buttonGoToProduction": {
+    "message": "프로덕션으로 이동"
+  },
+  "buttonGoToLocal": {
+    "message": "로컬로 이동"
+  },
+  "errorProdTldRequired": {
+    "message": "프로덕션 TLD가 필요합니다"
+  },
+  "errorLocalTldRequired": {
+    "message": "로컬 TLD가 필요합니다"
+  },
+  "errorTldsMustDiffer": {
+    "message": "TLD는 서로 달라야 합니다"
+  }
+}

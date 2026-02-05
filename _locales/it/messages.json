@@ -1,0 +1,38 @@
+{
+  "extensionName": {
+    "message": "Local Toggle"
+  },
+  "extensionDescription": {
+    "message": "Passa tra TLD .test e produzione con un solo clic"
+  },
+  "actionTitle": {
+    "message": "Cambia TLD (.test ↔ produzione)"
+  },
+  "menuConfigure": {
+    "message": "Configura impostazioni per questo dominio"
+  },
+  "menuClearTld": {
+    "message": "Cancella TLD di produzione salvato per questo dominio"
+  },
+  "labelProduction": {
+    "message": "Produzione"
+  },
+  "labelLocal": {
+    "message": "Locale"
+  },
+  "buttonGoToProduction": {
+    "message": "Vai a Produzione"
+  },
+  "buttonGoToLocal": {
+    "message": "Vai a Locale"
+  },
+  "errorProdTldRequired": {
+    "message": "TLD di produzione richiesto"
+  },
+  "errorLocalTldRequired": {
+    "message": "TLD locale richiesto"
+  },
+  "errorTldsMustDiffer": {
+    "message": "I TLD devono essere diversi"
+  }
+}

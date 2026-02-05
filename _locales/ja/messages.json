@@ -1,0 +1,38 @@
+{
+  "extensionName": {
+    "message": "Local Toggle"
+  },
+  "extensionDescription": {
+    "message": "ワンクリックで.testと本番TLDを切り替え"
+  },
+  "actionTitle": {
+    "message": "TLDを切り替え (.test ↔ 本番)"
+  },
+  "menuConfigure": {
+    "message": "このドメインの設定を構成"
+  },
+  "menuClearTld": {
+    "message": "このドメインの保存された本番TLDをクリア"
+  },
+  "labelProduction": {
+    "message": "本番"
+  },
+  "labelLocal": {
+    "message": "ローカル"
+  },
+  "buttonGoToProduction": {
+    "message": "本番へ移動"
+  },
+  "buttonGoToLocal": {
+    "message": "ローカルへ移動"
+  },
+  "errorProdTldRequired": {
+    "message": "本番TLDは必須です"
+  },
+  "errorLocalTldRequired": {
+    "message": "ローカルTLDは必須です"
+  },
+  "errorTldsMustDiffer": {
+    "message": "TLDは異なる必要があります"
+  }
+}
