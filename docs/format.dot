@@ -1,0 +1,261 @@
+digraph format {
+  rankdir=TB;
+  node [fontname="Menlo, monospace" fontsize=11];
+  edge [fontname="Menlo, monospace" fontsize=9];
+  graph [fontname="Menlo, monospace" fontsize=11 bgcolor=white];
+
+  // Title
+  title [shape=none label=<
+    <TABLE BORDER="0" CELLBORDER="0" CELLSPACING="0">
+      <TR><TD><B>Sync Storage Entry Format</B></TD></TR>
+    </TABLE>
+  >];
+
+  // Format summary
+  summary [shape=none label=<
+    <TABLE BORDER="1" CELLBORDER="1" CELLSPACING="0" CELLPADDING="8" COLOR="#333333">
+      <TR><TD COLSPAN="2" BGCOLOR="#f5f5f5"><B>Format Summary</B></TD></TR>
+      <TR>
+        <TD BGCOLOR="#e8e8e8"><B>Entry Format</B></TD>
+        <TD BGCOLOR="#ffffff"><FONT FACE="Menlo, monospace" POINT-SIZE="10">&lt;version&gt;|&lt;envCount&gt;|&lt;flags&gt;|&lt;hostCheck&gt;|&lt;env values | delimited, ^ sub-delimited&gt;|&lt;hostnames ^ delimited&gt;</FONT></TD>
+      </TR>
+      <TR>
+        <TD BGCOLOR="#e8e8e8"><B>Storage Format</B></TD>
+        <TD BGCOLOR="#ffffff"><FONT FACE="Menlo, monospace" POINT-SIZE="10">base64(deflate(JSON array of entries))</FONT></TD>
+      </TR>
+      <TR>
+        <TD BGCOLOR="#e8e8e8"><B>Storage Layer</B></TD>
+        <TD BGCOLOR="#ffffff"><FONT FACE="Menlo, monospace" POINT-SIZE="10">chrome.storage.sync (up to 13 keys, 100KB total)</FONT></TD>
+      </TR>
+      <TR>
+        <TD BGCOLOR="#e8e8e8"><B>Cache Layer</B></TD>
+        <TD BGCOLOR="#ffffff"><FONT FACE="Menlo, monospace" POINT-SIZE="10">chrome.storage.session (hot path)</FONT></TD>
+      </TR>
+      <TR>
+        <TD BGCOLOR="#e8e8e8"><B>Default TLDs</B></TD>
+        <TD BGCOLOR="#ffffff"><FONT FACE="Menlo, monospace" POINT-SIZE="10">Environment 1: .test, Environment 2: .com, Environment 3+: .com</FONT></TD>
+      </TR>
+      <TR>
+        <TD BGCOLOR="#e8e8e8"><B>Default Ports</B></TD>
+        <TD BGCOLOR="#ffffff"><FONT FACE="Menlo, monospace" POINT-SIZE="10">Derived from TLS flag: https = 443, http = 80</FONT></TD>
+      </TR>
+      <TR>
+        <TD BGCOLOR="#e8e8e8"><B>Default Titles</B></TD>
+        <TD BGCOLOR="#ffffff"><FONT FACE="Menlo, monospace" POINT-SIZE="10">Environment 1: "Local", Environment 2: "Production", Environment 3+: "Environment N"</FONT></TD>
+      </TR>
+      <TR>
+        <TD BGCOLOR="#e8e8e8"><B>Ordering</B></TD>
+        <TD BGCOLOR="#ffffff"><FONT FACE="Menlo, monospace" POINT-SIZE="10">Local must be first, Production must be second</FONT></TD>
+      </TR>
+      <TR>
+        <TD BGCOLOR="#e8e8e8"><B>Delimiter</B></TD>
+        <TD BGCOLOR="#ffffff"><FONT FACE="Menlo, monospace" POINT-SIZE="10">| (pipe) — separates major sections</FONT></TD>
+      </TR>
+      <TR>
+        <TD BGCOLOR="#e8e8e8"><B>Sub-Delimiter</B></TD>
+        <TD BGCOLOR="#ffffff"><FONT FACE="Menlo, monospace" POINT-SIZE="10">^ (caret) — separates values within a section</FONT></TD>
+      </TR>
+    </TABLE>
+  >];
+
+  // Full serialized string
+  full [shape=none label=<
+    <TABLE BORDER="1" CELLBORDER="1" CELLSPACING="0" CELLPADDING="6" COLOR="#333333">
+      <TR><TD COLSPAN="27" BGCOLOR="#f5f5f5"><B>Example with Three Environments</B></TD></TR>
+      <TR>
+        <TD BGCOLOR="#e8e8e8" PORT="ver">0</TD>
+        <TD BGCOLOR="#e8e8e8">|</TD>
+        <TD BGCOLOR="#e8e8e8" PORT="count">3</TD>
+        <TD BGCOLOR="#e8e8e8">|</TD>
+        <TD BGCOLOR="#dbeafe" PORT="e1f">1111</TD>
+        <TD BGCOLOR="#dcfce7" PORT="e2f">1010</TD>
+        <TD BGCOLOR="#fef9c3" PORT="e3f">1110</TD>
+        <TD BGCOLOR="#e8e8e8">|</TD>
+        <TD BGCOLOR="#e8e8e8" PORT="hc">1</TD>
+        <TD BGCOLOR="#e8e8e8">|</TD>
+        <TD BGCOLOR="#dbeafe">Dev</TD>
+        <TD BGCOLOR="#dbeafe">^</TD>
+        <TD BGCOLOR="#dbeafe">.local</TD>
+        <TD BGCOLOR="#dbeafe">^</TD>
+        <TD BGCOLOR="#dbeafe" PORT="e1v">3000</TD>
+        <TD BGCOLOR="#e8e8e8">|</TD>
+        <TD BGCOLOR="#dcfce7" PORT="e2v">Prod</TD>
+        <TD BGCOLOR="#e8e8e8">|</TD>
+        <TD BGCOLOR="#fef9c3">Staging</TD>
+        <TD BGCOLOR="#fef9c3">^</TD>
+        <TD BGCOLOR="#fef9c3" PORT="e3v">.staging</TD>
+        <TD BGCOLOR="#e8e8e8">|</TD>
+        <TD BGCOLOR="#fde8e8">localapp.</TD>
+        <TD BGCOLOR="#fde8e8">^</TD>
+        <TD BGCOLOR="#fde8e8">myapp.</TD>
+        <TD BGCOLOR="#fde8e8">^</TD>
+        <TD BGCOLOR="#fde8e8" PORT="hosts">stagingapp.</TD>
+      </TR>
+      <TR>
+        <TD BGCOLOR="#f5f5f5"><FONT POINT-SIZE="8">Version</FONT></TD>
+        <TD BGCOLOR="#f5f5f5"><FONT POINT-SIZE="8">Delimiter</FONT></TD>
+        <TD BGCOLOR="#f5f5f5"><FONT POINT-SIZE="8">Environment<BR/>Count</FONT></TD>
+        <TD BGCOLOR="#f5f5f5"><FONT POINT-SIZE="8">Delimiter</FONT></TD>
+        <TD BGCOLOR="#f5f5f5" PORT="e1fl"><FONT POINT-SIZE="8">Environment 1<BR/>Flags</FONT></TD>
+        <TD BGCOLOR="#f5f5f5" PORT="e2fl"><FONT POINT-SIZE="8">Environment 2<BR/>Flags</FONT></TD>
+        <TD BGCOLOR="#f5f5f5" PORT="e3fl"><FONT POINT-SIZE="8">Environment 3<BR/>Flags</FONT></TD>
+        <TD BGCOLOR="#f5f5f5"><FONT POINT-SIZE="8">Delimiter</FONT></TD>
+        <TD BGCOLOR="#f5f5f5"><FONT POINT-SIZE="8">Hostname<BR/>Divergence</FONT></TD>
+        <TD BGCOLOR="#f5f5f5"><FONT POINT-SIZE="8">Delimiter</FONT></TD>
+        <TD BGCOLOR="#f5f5f5"><FONT POINT-SIZE="8">Title</FONT></TD>
+        <TD BGCOLOR="#f5f5f5"><FONT POINT-SIZE="8">Sub-<BR/>Delimiter</FONT></TD>
+        <TD BGCOLOR="#f5f5f5"><FONT POINT-SIZE="8">TLD</FONT></TD>
+        <TD BGCOLOR="#f5f5f5"><FONT POINT-SIZE="8">Sub-<BR/>Delimiter</FONT></TD>
+        <TD BGCOLOR="#f5f5f5"><FONT POINT-SIZE="8">Port</FONT></TD>
+        <TD BGCOLOR="#f5f5f5"><FONT POINT-SIZE="8">Delimiter</FONT></TD>
+        <TD BGCOLOR="#f5f5f5"><FONT POINT-SIZE="8">Title</FONT></TD>
+        <TD BGCOLOR="#f5f5f5"><FONT POINT-SIZE="8">Delimiter</FONT></TD>
+        <TD BGCOLOR="#f5f5f5"><FONT POINT-SIZE="8">Title</FONT></TD>
+        <TD BGCOLOR="#f5f5f5"><FONT POINT-SIZE="8">Sub-<BR/>Delimiter</FONT></TD>
+        <TD BGCOLOR="#f5f5f5"><FONT POINT-SIZE="8">TLD</FONT></TD>
+        <TD BGCOLOR="#f5f5f5"><FONT POINT-SIZE="8">Delimiter</FONT></TD>
+        <TD BGCOLOR="#f5f5f5"><FONT POINT-SIZE="8">Hostname 1</FONT></TD>
+        <TD BGCOLOR="#f5f5f5"><FONT POINT-SIZE="8">Sub-<BR/>Delimiter</FONT></TD>
+        <TD BGCOLOR="#f5f5f5"><FONT POINT-SIZE="8">Hostname 2</FONT></TD>
+        <TD BGCOLOR="#f5f5f5"><FONT POINT-SIZE="8">Sub-<BR/>Delimiter</FONT></TD>
+        <TD BGCOLOR="#f5f5f5" PORT="hostsl"><FONT POINT-SIZE="8">Hostname 3</FONT></TD>
+      </TR>
+    </TABLE>
+  >];
+
+  // Env 1 flag breakdown
+  env1 [shape=none label=<
+    <TABLE BORDER="1" CELLBORDER="1" CELLSPACING="0" CELLPADDING="5" COLOR="#3b82f6">
+      <TR><TD COLSPAN="4" BGCOLOR="#dbeafe"><B>Environment 1 Flags</B></TD></TR>
+      <TR>
+        <TD BGCOLOR="#dbeafe">1</TD>
+        <TD BGCOLOR="#dbeafe">1</TD>
+        <TD BGCOLOR="#dbeafe">1</TD>
+        <TD BGCOLOR="#dbeafe">1</TD>
+      </TR>
+      <TR>
+        <TD BGCOLOR="#eff6ff"><FONT POINT-SIZE="8">TLS</FONT></TD>
+        <TD BGCOLOR="#eff6ff"><FONT POINT-SIZE="8">Custom TLD</FONT></TD>
+        <TD BGCOLOR="#eff6ff"><FONT POINT-SIZE="8">Custom Port</FONT></TD>
+        <TD BGCOLOR="#eff6ff"><FONT POINT-SIZE="8">Custom Title</FONT></TD>
+      </TR>
+      <TR>
+        <TD BGCOLOR="#eff6ff"><FONT POINT-SIZE="8">https</FONT></TD>
+        <TD BGCOLOR="#eff6ff"><FONT POINT-SIZE="8">.local</FONT></TD>
+        <TD BGCOLOR="#eff6ff"><FONT POINT-SIZE="8">3000</FONT></TD>
+        <TD BGCOLOR="#eff6ff"><FONT POINT-SIZE="8">Dev</FONT></TD>
+      </TR>
+    </TABLE>
+  >];
+
+  // Env 2 flag breakdown
+  env2 [shape=none label=<
+    <TABLE BORDER="1" CELLBORDER="1" CELLSPACING="0" CELLPADDING="5" COLOR="#22c55e">
+      <TR><TD COLSPAN="4" BGCOLOR="#dcfce7"><B>Environment 2 Flags</B></TD></TR>
+      <TR>
+        <TD BGCOLOR="#dcfce7">1</TD>
+        <TD BGCOLOR="#dcfce7">0</TD>
+        <TD BGCOLOR="#dcfce7">1</TD>
+        <TD BGCOLOR="#dcfce7">0</TD>
+      </TR>
+      <TR>
+        <TD BGCOLOR="#f0fdf4"><FONT POINT-SIZE="8">TLS</FONT></TD>
+        <TD BGCOLOR="#f0fdf4"><FONT POINT-SIZE="8">Custom TLD</FONT></TD>
+        <TD BGCOLOR="#f0fdf4"><FONT POINT-SIZE="8">Custom Port</FONT></TD>
+        <TD BGCOLOR="#f0fdf4"><FONT POINT-SIZE="8">Custom Title</FONT></TD>
+      </TR>
+      <TR>
+        <TD BGCOLOR="#f0fdf4"><FONT POINT-SIZE="8">https</FONT></TD>
+        <TD BGCOLOR="#f0fdf4"><FONT POINT-SIZE="8">Default<BR/>(.com)</FONT></TD>
+        <TD BGCOLOR="#f0fdf4"><FONT POINT-SIZE="8">Default<BR/>(443)</FONT></TD>
+        <TD BGCOLOR="#f0fdf4"><FONT POINT-SIZE="8">Default<BR/>(Production)</FONT></TD>
+      </TR>
+    </TABLE>
+  >];
+
+  // Env 3 flag breakdown
+  env3 [shape=none label=<
+    <TABLE BORDER="1" CELLBORDER="1" CELLSPACING="0" CELLPADDING="5" COLOR="#eab308">
+      <TR><TD COLSPAN="4" BGCOLOR="#fef9c3"><B>Environment 3 Flags</B></TD></TR>
+      <TR>
+        <TD BGCOLOR="#fef9c3">1</TD>
+        <TD BGCOLOR="#fef9c3">1</TD>
+        <TD BGCOLOR="#fef9c3">1</TD>
+        <TD BGCOLOR="#fef9c3">0</TD>
+      </TR>
+      <TR>
+        <TD BGCOLOR="#fefce8"><FONT POINT-SIZE="8">TLS</FONT></TD>
+        <TD BGCOLOR="#fefce8"><FONT POINT-SIZE="8">Custom TLD</FONT></TD>
+        <TD BGCOLOR="#fefce8"><FONT POINT-SIZE="8">Custom Port</FONT></TD>
+        <TD BGCOLOR="#fefce8"><FONT POINT-SIZE="8">Custom Title</FONT></TD>
+      </TR>
+      <TR>
+        <TD BGCOLOR="#fefce8"><FONT POINT-SIZE="8">https</FONT></TD>
+        <TD BGCOLOR="#fefce8"><FONT POINT-SIZE="8">.staging</FONT></TD>
+        <TD BGCOLOR="#fefce8"><FONT POINT-SIZE="8">Default<BR/>(443)</FONT></TD>
+        <TD BGCOLOR="#fefce8"><FONT POINT-SIZE="8">Default<BR/>(Environment 3)</FONT></TD>
+      </TR>
+    </TABLE>
+  >];
+
+  // Host check detail
+  hostdetail [shape=none label=<
+    <TABLE BORDER="1" CELLBORDER="1" CELLSPACING="0" CELLPADDING="5" COLOR="#ef4444">
+      <TR><TD BGCOLOR="#fde8e8"><B>Hostnames (Divergence = 1)</B></TD></TR>
+      <TR><TD BGCOLOR="#fef2f2"><FONT POINT-SIZE="9">One per environment, ordered<BR/>to match environment flag order</FONT></TD></TR>
+      <TR>
+        <TD BGCOLOR="#fef2f2"><FONT POINT-SIZE="8">
+          Environment 1: localapp.<BR/>
+          Environment 2: myapp.<BR/>
+          Environment 3: stagingapp.
+        </FONT></TD>
+      </TR>
+    </TABLE>
+  >];
+
+  // Common case example
+  common [shape=none label=<
+    <TABLE BORDER="1" CELLBORDER="1" CELLSPACING="0" CELLPADDING="6" COLOR="#666666">
+      <TR><TD COLSPAN="11" BGCOLOR="#f5f5f5"><B>Default Values</B></TD></TR>
+      <TR>
+        <TD BGCOLOR="#e8e8e8">0</TD>
+        <TD BGCOLOR="#e8e8e8">|</TD>
+        <TD BGCOLOR="#e8e8e8">3</TD>
+        <TD BGCOLOR="#e8e8e8">|</TD>
+        <TD BGCOLOR="#dbeafe">0000</TD>
+        <TD BGCOLOR="#dcfce7">1000</TD>
+        <TD BGCOLOR="#fef9c3">1000</TD>
+        <TD BGCOLOR="#e8e8e8">|</TD>
+        <TD BGCOLOR="#e8e8e8">0</TD>
+        <TD BGCOLOR="#e8e8e8">|</TD>
+        <TD BGCOLOR="#fde8e8">myapp.</TD>
+      </TR>
+      <TR>
+        <TD BGCOLOR="#f5f5f5"><FONT POINT-SIZE="8">Version</FONT></TD>
+        <TD BGCOLOR="#f5f5f5"><FONT POINT-SIZE="8">Delimiter</FONT></TD>
+        <TD BGCOLOR="#f5f5f5"><FONT POINT-SIZE="8">Environment<BR/>Count</FONT></TD>
+        <TD BGCOLOR="#f5f5f5"><FONT POINT-SIZE="8">Delimiter</FONT></TD>
+        <TD BGCOLOR="#f5f5f5"><FONT POINT-SIZE="8">http, .test<BR/>Port 80<BR/>Local</FONT></TD>
+        <TD BGCOLOR="#f5f5f5"><FONT POINT-SIZE="8">https, .com<BR/>Port 443<BR/>Production</FONT></TD>
+        <TD BGCOLOR="#f5f5f5"><FONT POINT-SIZE="8">https, .com<BR/>Port 443<BR/>Environment 3</FONT></TD>
+        <TD BGCOLOR="#f5f5f5"><FONT POINT-SIZE="8">Delimiter</FONT></TD>
+        <TD BGCOLOR="#f5f5f5"><FONT POINT-SIZE="8">Shared<BR/>Hostname</FONT></TD>
+        <TD BGCOLOR="#f5f5f5"><FONT POINT-SIZE="8">Delimiter</FONT></TD>
+        <TD BGCOLOR="#f5f5f5"><FONT POINT-SIZE="8">Hostname</FONT></TD>
+      </TR>
+    </TABLE>
+  >];
+
+  // Edges
+  title -> summary [style=invis];
+  summary -> full [style=invis];
+  full:e1fl -> env1 [color="#3b82f6"];
+  full:e2fl -> env2 [color="#22c55e"];
+  full:e3fl -> env3 [color="#eab308"];
+  full:hostsl -> hostdetail [color="#ef4444"];
+
+  {rank=same; env1; env2; env3; hostdetail};
+
+  env1 -> common [style=invis];
+  env2 -> common [style=invis];
+}
