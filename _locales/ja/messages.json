@@ -34,5 +34,32 @@
   },
   "errorTldsMustDiffer": {
     "message": "TLDは異なる必要があります"
+  },
+  "restrictedPage": {
+    "message": "このページではLocal Toggleは使用できません。"
+  },
+  "loading": {
+    "message": "読み込み中\u2026"
+  },
+  "headingCurrentDomain": {
+    "message": "現在のドメイン"
+  },
+  "headingOtherDomains": {
+    "message": "その他のドメイン"
+  },
+  "emptyDomainList": {
+    "message": "他に設定されたドメインはありません。"
+  },
+  "buttonGoToDomain": {
+    "message": "ドメインに移動"
+  },
+  "buttonEdit": {
+    "message": "編集"
+  },
+  "buttonSave": {
+    "message": "保存"
+  },
+  "buttonDelete": {
+    "message": "削除"
   }
 }

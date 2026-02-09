@@ -2,9 +2,9 @@
   "manifest_version": 3,
   "name": "__MSG_extensionName__",
   "description": "__MSG_extensionDescription__",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "default_locale": "en",
-  "permissions": ["activeTab", "contextMenus", "storage", "tabs"],
+  "permissions": ["activeTab", "contextMenus", "storage", "tabs", "sidePanel"],
   "action": {
     "default_title": "__MSG_actionTitle__",
     "default_icon": "icon-128.png"
@@ -13,6 +13,10 @@
     "128": "icon-128.png"
   },
   "background": {
-    "service_worker": "background.js"
+    "service_worker": "background.js",
+    "type": "module"
+  },
+  "side_panel": {
+    "default_path": "sidepanel.html"
   }
 }

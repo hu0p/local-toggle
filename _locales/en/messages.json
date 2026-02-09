@@ -46,5 +46,41 @@
   "errorTldsMustDiffer": {
     "message": "TLDs must be different",
     "description": "Error when production and local TLDs are the same"
+  },
+  "restrictedPage": {
+    "message": "Local Toggle doesn\u2019t work on this page.",
+    "description": "Shown when the popup opens on a browser internal page (chrome://, about:, etc.)"
+  },
+  "loading": {
+    "message": "Loading\u2026",
+    "description": "Shown while the side panel is loading domain data"
+  },
+  "headingCurrentDomain": {
+    "message": "Current domain",
+    "description": "Heading for the current domain configuration section"
+  },
+  "headingOtherDomains": {
+    "message": "Other domains",
+    "description": "Heading for the list of other configured domains"
+  },
+  "emptyDomainList": {
+    "message": "No other domains configured yet.",
+    "description": "Shown when there are no other configured domains"
+  },
+  "buttonGoToDomain": {
+    "message": "Go to domain",
+    "description": "Accessible label for the go-to button on a domain list item"
+  },
+  "buttonEdit": {
+    "message": "Edit",
+    "description": "Accessible label for the edit button on a domain list item"
+  },
+  "buttonSave": {
+    "message": "Save",
+    "description": "Label for the save button in the edit form"
+  },
+  "buttonDelete": {
+    "message": "Delete",
+    "description": "Label for the delete button in the edit form"
   }
 }

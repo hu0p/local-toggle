@@ -34,5 +34,32 @@
   },
   "errorTldsMustDiffer": {
     "message": "TLD는 서로 달라야 합니다"
+  },
+  "restrictedPage": {
+    "message": "이 페이지에서는 Local Toggle을 사용할 수 없습니다."
+  },
+  "loading": {
+    "message": "로딩 중\u2026"
+  },
+  "headingCurrentDomain": {
+    "message": "현재 도메인"
+  },
+  "headingOtherDomains": {
+    "message": "다른 도메인"
+  },
+  "emptyDomainList": {
+    "message": "아직 설정된 다른 도메인이 없습니다."
+  },
+  "buttonGoToDomain": {
+    "message": "도메인으로 이동"
+  },
+  "buttonEdit": {
+    "message": "편집"
+  },
+  "buttonSave": {
+    "message": "저장"
+  },
+  "buttonDelete": {
+    "message": "삭제"
   }
 }

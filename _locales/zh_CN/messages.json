@@ -34,5 +34,32 @@
   },
   "errorTldsMustDiffer": {
     "message": "TLD必须不同"
+  },
+  "restrictedPage": {
+    "message": "Local Toggle 无法在此页面上使用。"
+  },
+  "loading": {
+    "message": "加载中\u2026"
+  },
+  "headingCurrentDomain": {
+    "message": "当前域名"
+  },
+  "headingOtherDomains": {
+    "message": "其他域名"
+  },
+  "emptyDomainList": {
+    "message": "尚未配置其他域名。"
+  },
+  "buttonGoToDomain": {
+    "message": "前往域名"
+  },
+  "buttonEdit": {
+    "message": "编辑"
+  },
+  "buttonSave": {
+    "message": "保存"
+  },
+  "buttonDelete": {
+    "message": "删除"
   }
 }

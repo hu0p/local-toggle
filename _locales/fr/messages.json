@@ -34,5 +34,32 @@
   },
   "errorTldsMustDiffer": {
     "message": "Les TLD doivent être différents"
+  },
+  "restrictedPage": {
+    "message": "Local Toggle ne fonctionne pas sur cette page."
+  },
+  "loading": {
+    "message": "Chargement\u2026"
+  },
+  "headingCurrentDomain": {
+    "message": "Domaine actuel"
+  },
+  "headingOtherDomains": {
+    "message": "Autres domaines"
+  },
+  "emptyDomainList": {
+    "message": "Aucun autre domaine configuré pour le moment."
+  },
+  "buttonGoToDomain": {
+    "message": "Aller au domaine"
+  },
+  "buttonEdit": {
+    "message": "Modifier"
+  },
+  "buttonSave": {
+    "message": "Enregistrer"
+  },
+  "buttonDelete": {
+    "message": "Supprimer"
   }
 }
