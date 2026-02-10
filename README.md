@@ -54,7 +54,7 @@ The extension extracts the base domain from your current URL and swaps the TLD w
 
 ## Contributing
 
-Put this in a pull request for review.
+Fork and submit a pull request for review.
 
 **Local Development**
 
