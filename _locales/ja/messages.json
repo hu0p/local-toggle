@@ -9,10 +9,7 @@
     "message": "TLDを切り替え (.test ↔ 本番)"
   },
   "menuConfigure": {
-    "message": "このドメインの設定を構成"
-  },
-  "menuClearTld": {
-    "message": "このドメインの保存された本番TLDをクリア"
+    "message": "ドメインを設定"
   },
   "labelProduction": {
     "message": "本番"
@@ -34,6 +31,9 @@
   },
   "errorTldsMustDiffer": {
     "message": "TLDは異なる必要があります"
+  },
+  "errorHostnameRequired": {
+    "message": "ホスト名は必須です"
   },
   "restrictedPage": {
     "message": "このページではLocal Toggleは使用できません。"
@@ -61,5 +61,14 @@
   },
   "buttonDelete": {
     "message": "削除"
+  },
+  "labelNavigateOnSave": {
+    "message": "保存時にページを移動"
+  },
+  "labelCloseOnSave": {
+    "message": "保存時にサイドパネルを閉じる"
+  },
+  "badgeActive": {
+    "message": "現在"
   }
 }

@@ -12,12 +12,8 @@
     "description": "Tooltip shown when hovering over the extension icon"
   },
   "menuConfigure": {
-    "message": "Configure settings for this domain",
+    "message": "Configure Domains",
     "description": "Context menu item to open configuration"
-  },
-  "menuClearTld": {
-    "message": "Clear saved production TLD for this domain",
-    "description": "Context menu item to clear saved settings"
   },
   "labelProduction": {
     "message": "Production",
@@ -46,6 +42,10 @@
   "errorTldsMustDiffer": {
     "message": "TLDs must be different",
     "description": "Error when production and local TLDs are the same"
+  },
+  "errorHostnameRequired": {
+    "message": "Hostname is required",
+    "description": "Error when a hostname field is empty"
   },
   "restrictedPage": {
     "message": "Local Toggle doesn\u2019t work on this page.",
@@ -82,5 +82,17 @@
   "buttonDelete": {
     "message": "Delete",
     "description": "Label for the delete button in the edit form"
+  },
+  "labelNavigateOnSave": {
+    "message": "Navigate on Save",
+    "description": "Label for the checkbox that controls whether saving navigates to the other environment"
+  },
+  "labelCloseOnSave": {
+    "message": "Close Side Panel on Save",
+    "description": "Label for the checkbox that controls whether the side panel closes after saving"
+  },
+  "badgeActive": {
+    "message": "Active",
+    "description": "Badge shown next to the field label for the environment the user is currently on"
   }
 }

@@ -9,10 +9,7 @@
     "message": "Changer de TLD (.test ↔ production)"
   },
   "menuConfigure": {
-    "message": "Configurer les paramètres pour ce domaine"
-  },
-  "menuClearTld": {
-    "message": "Effacer le TLD de production enregistré pour ce domaine"
+    "message": "Configurer les domaines"
   },
   "labelProduction": {
     "message": "Production"
@@ -34,6 +31,9 @@
   },
   "errorTldsMustDiffer": {
     "message": "Les TLD doivent être différents"
+  },
+  "errorHostnameRequired": {
+    "message": "Le nom d'hôte est requis"
   },
   "restrictedPage": {
     "message": "Local Toggle ne fonctionne pas sur cette page."
@@ -61,5 +61,14 @@
   },
   "buttonDelete": {
     "message": "Supprimer"
+  },
+  "labelNavigateOnSave": {
+    "message": "Naviguer à l'enregistrement"
+  },
+  "labelCloseOnSave": {
+    "message": "Fermer le panneau latéral à l'enregistrement"
+  },
+  "badgeActive": {
+    "message": "Actif"
   }
 }

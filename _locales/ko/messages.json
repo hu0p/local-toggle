@@ -9,10 +9,7 @@
     "message": "TLD 전환 (.test ↔ 프로덕션)"
   },
   "menuConfigure": {
-    "message": "이 도메인의 설정 구성"
-  },
-  "menuClearTld": {
-    "message": "이 도메인의 저장된 프로덕션 TLD 삭제"
+    "message": "도메인 구성"
   },
   "labelProduction": {
     "message": "프로덕션"
@@ -34,6 +31,9 @@
   },
   "errorTldsMustDiffer": {
     "message": "TLD는 서로 달라야 합니다"
+  },
+  "errorHostnameRequired": {
+    "message": "호스트 이름은 필수입니다"
   },
   "restrictedPage": {
     "message": "이 페이지에서는 Local Toggle을 사용할 수 없습니다."
@@ -61,5 +61,14 @@
   },
   "buttonDelete": {
     "message": "삭제"
+  },
+  "labelNavigateOnSave": {
+    "message": "저장 시 페이지 이동"
+  },
+  "labelCloseOnSave": {
+    "message": "저장 시 사이드 패널 닫기"
+  },
+  "badgeActive": {
+    "message": "현재"
   }
 }

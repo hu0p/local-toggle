@@ -9,10 +9,7 @@
     "message": "切换TLD (.test ↔ 生产)"
   },
   "menuConfigure": {
-    "message": "配置此域名的设置"
-  },
-  "menuClearTld": {
-    "message": "清除此域名已保存的生产TLD"
+    "message": "配置域名"
   },
   "labelProduction": {
     "message": "生产"
@@ -34,6 +31,9 @@
   },
   "errorTldsMustDiffer": {
     "message": "TLD必须不同"
+  },
+  "errorHostnameRequired": {
+    "message": "主机名为必填项"
   },
   "restrictedPage": {
     "message": "Local Toggle 无法在此页面上使用。"
@@ -61,5 +61,14 @@
   },
   "buttonDelete": {
     "message": "删除"
+  },
+  "labelNavigateOnSave": {
+    "message": "保存时跳转页面"
+  },
+  "labelCloseOnSave": {
+    "message": "保存时关闭侧边栏"
+  },
+  "badgeActive": {
+    "message": "当前"
   }
 }

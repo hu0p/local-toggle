@@ -6,8 +6,11 @@
   <style>
     body {
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      height: 100vh;
+      box-sizing: border-box;
       padding: 1rem;
       margin: 0;
+      overflow: hidden;
       background: #ffffff;
       color: #202124;
     }
@@ -23,6 +26,29 @@
       margin-bottom: 6px;
     }
 
+    .active-badge {
+      display: inline-block;
+      font-size: 9px;
+      font-weight: 600;
+      line-height: 1;
+      padding: 2px 5px;
+      border-radius: 9px;
+      margin-left: 6px;
+      vertical-align: middle;
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+    }
+
+    .active-badge[data-env="local"] {
+      background: #f0fdf4;
+      color: #15803d;
+    }
+
+    .active-badge[data-env="prod"] {
+      background: #eff6ff;
+      color: #1d4ed8;
+    }
+
     .input-row {
       display: flex;
       align-items: center;
@@ -32,20 +58,18 @@
     .url-row {
       display: flex;
       align-items: center;
-      gap: 4px;
+      gap: 0;
       font-size: 13px;
       font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
       color: #5f6368;
       white-space: nowrap;
       padding: 4px 0;
+      min-width: 0;
     }
 
     .tls-toggle {
       cursor: pointer;
       flex-shrink: 0;
-      position: relative;
-      display: inline-flex;
-      align-items: center;
     }
 
     .tls-toggle input {
@@ -55,75 +79,56 @@
       height: 0;
     }
 
-    .tls-track {
-      position: relative;
-      width: 52px;
-      height: 20px;
-      background: #78716c;
-      border-radius: 10px;
-      transition: background 0.2s;
-      display: flex;
-      align-items: center;
+    .tls-label {
+      border-bottom: 1px dotted #dadce0;
+      transition: border-color 0.15s;
     }
 
-    .tls-text {
-      font-size: 9px;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.3px;
-      color: rgba(255, 255, 255, 0.9);
-      transition: opacity 0.15s;
-      position: absolute;
+    .tls-toggle:has(input:focus-visible) .tls-label {
+      border-bottom-style: solid;
+      border-bottom-color: #1a73e8;
     }
 
-    .tls-text-on {
-      left: 5px;
-      opacity: 0;
+    .hostname-input {
+      min-width: 3ch;
+      padding: 4px 0;
+      font-size: 13px;
+      font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+      color: #5f6368;
+      background: transparent;
+      border: none;
+      border-bottom: 1px dotted #dadce0;
+      border-radius: 0;
+      outline: none;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      transition: border-color 0.15s;
     }
 
-    .tls-text-off {
-      right: 5px;
-      opacity: 1;
+    .hostname-input:focus {
+      border-bottom-style: solid;
+      border-bottom-color: #1a73e8;
+      text-overflow: clip;
     }
 
-    .tls-thumb {
-      position: absolute;
-      top: 2px;
-      left: 2px;
-      width: 16px;
-      height: 16px;
-      background: #fff;
-      border-radius: 50%;
-      transition: transform 0.2s;
-      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
-    }
-
-    .tls-toggle:has(input:checked) .tls-track {
-      background: #4d7c6f;
-    }
-
-    .tls-toggle:has(input:checked) .tls-thumb {
-      transform: translateX(calc(52px - 16px - 4px));
-    }
-
-    .tls-toggle:has(input:checked) .tls-text-on {
-      opacity: 1;
-    }
-
-    .tls-toggle:has(input:checked) .tls-text-off {
-      opacity: 0;
-    }
-
-    .tls-toggle:has(input:focus-visible) .tls-track {
-      outline: 2px solid #1a73e8;
-      outline-offset: 2px;
-    }
-
-    .domain {
+    .url-separator {
+      flex-shrink: 0;
       color: #5f6368;
     }
 
+    .domain-truncate-start {
+      flex-shrink: 100;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      min-width: 2ch;
+    }
+
+    .domain-truncate-end {
+      flex-shrink: 0;
+    }
+
     .tld-input {
+      flex-shrink: 0;
       width: 6ch;
       min-width: 3ch;
       padding: 4px 0;
@@ -183,6 +188,12 @@
       fill: currentColor;
     }
 
+    #submit {
+      display: block;
+      margin-left: auto;
+      width: fit-content;
+    }
+
     .error-message {
       font-size: 11px;
       color: #d93025;
@@ -198,7 +209,8 @@
       opacity: 1;
     }
 
-    .input-row.error .tld-input {
+    .input-row.error .tld-input,
+    .input-row.error .hostname-input {
       color: #d93025;
       border-bottom-color: #d93025;
     }
@@ -215,6 +227,33 @@
 
     #panel-content {
       display: none;
+      flex-direction: column;
+      height: 100%;
+    }
+
+    #domain-list-section {
+      flex: 1;
+      min-height: 0;
+      overflow-y: auto;
+      scrollbar-width: thin;
+      scrollbar-color: #dadce0 transparent;
+    }
+
+    #domain-list-section::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    #domain-list-section::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    #domain-list-section::-webkit-scrollbar-thumb {
+      background: #dadce0;
+      border-radius: 3px;
+    }
+
+    #domain-list-section::-webkit-scrollbar-thumb:hover {
+      background: #bdc1c6;
     }
 
     @keyframes shake {
@@ -294,6 +333,7 @@
       list-style: none;
       margin: 0;
       padding: 0;
+      overflow-x: hidden;
     }
 
     .domain-item {
@@ -312,13 +352,36 @@
 
     .domain-item-url {
       flex: 1;
+      display: flex;
+      align-items: center;
       font-size: 12px;
       font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
       color: #5f6368;
       overflow: hidden;
-      text-overflow: ellipsis;
       white-space: nowrap;
       min-width: 0;
+    }
+
+    .domain-item-side {
+      display: flex;
+      flex: 0 1 auto;
+      overflow: hidden;
+      min-width: 0;
+    }
+
+    .domain-item-name {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      min-width: 0;
+    }
+
+    .domain-item-tld {
+      flex-shrink: 0;
+    }
+
+    .domain-item-arrow {
+      flex-shrink: 0;
+      padding: 0 3px;
     }
 
     .icon-button {
@@ -375,11 +438,11 @@
     }
 
     .edit-header h3 {
+      display: flex;
       font-size: 13px;
       font-weight: 600;
       margin: 0;
       overflow: hidden;
-      text-overflow: ellipsis;
       white-space: nowrap;
       min-width: 0;
     }
@@ -439,6 +502,25 @@
       transform: scale(0.97);
     }
 
+    .option-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 8px;
+      font-size: 13px;
+      color: #5f6368;
+      cursor: pointer;
+    }
+
+    .option-row:last-of-type {
+      margin-bottom: 16px;
+    }
+
+    .option-row input[type="checkbox"] {
+      margin: 0;
+      accent-color: #1a73e8;
+    }
+
     @media (prefers-color-scheme: dark) {
       body {
         background: hsl(60 2.7% 14.5%);
@@ -449,16 +531,39 @@
         color: #9aa0a6;
       }
 
+      .active-badge[data-env="local"] {
+        background: #14532d;
+        color: #86efac;
+      }
+
+      .active-badge[data-env="prod"] {
+        background: #1e3a5f;
+        color: #93c5fd;
+      }
+
       .field-group label.field-label {
         color: #9aa0a6;
       }
 
-      .domain {
+      .hostname-input {
+        color: #9aa0a6;
+        border-bottom-color: #5f6368;
+      }
+
+      .hostname-input:focus {
+        border-bottom-color: #8ab4f8;
+      }
+
+      .url-separator {
         color: #9aa0a6;
       }
 
-      .tls-toggle:has(input:focus-visible) .tls-track {
-        outline-color: #8ab4f8;
+      .tls-label {
+        border-bottom-color: #5f6368;
+      }
+
+      .tls-toggle:has(input:focus-visible) .tls-label {
+        border-bottom-color: #8ab4f8;
       }
 
       .tld-input {
@@ -491,7 +596,8 @@
         color: #f28b82;
       }
 
-      .input-row.error .tld-input {
+      .input-row.error .tld-input,
+      .input-row.error .hostname-input {
         color: #f28b82;
         border-bottom-color: #f28b82;
       }
@@ -511,6 +617,18 @@
 
       .section-divider {
         border-top-color: #5f6368;
+      }
+
+      #domain-list-section {
+        scrollbar-color: #5f6368 transparent;
+      }
+
+      #domain-list-section::-webkit-scrollbar-thumb {
+        background: #5f6368;
+      }
+
+      #domain-list-section::-webkit-scrollbar-thumb:hover {
+        background: #9aa0a6;
       }
 
       .domain-item.editing {
@@ -559,6 +677,14 @@
         background: #f28b82;
         color: #202124;
       }
+
+      .option-row {
+        color: #9aa0a6;
+      }
+
+      .option-row input[type="checkbox"] {
+        accent-color: #8ab4f8;
+      }
     }
   </style>
 </head>
@@ -580,13 +706,12 @@
           <div class="url-row">
             <label class="tls-toggle">
               <input type="checkbox" id="tls-production" checked aria-label="Toggle HTTPS for production">
-              <span class="tls-track">
-                <span class="tls-text tls-text-on">https</span>
-                <span class="tls-text tls-text-off">http</span>
-                <span class="tls-thumb"></span>
-              </span>
+              <span class="tls-label">https</span>
             </label>
-            <span class="domain" id="prod-domain">://</span>
+            <span class="url-separator">://</span>
+            <input type="text" id="prod-hostname" class="hostname-input"
+              autocomplete="off" spellcheck="false" aria-label="Production hostname">
+            <span class="url-separator">.</span>
           </div>
           <input type="text" id="tld" class="tld-input" placeholder="com" aria-label="Production top-level domain"
             autocomplete="off" spellcheck="false">
@@ -598,24 +723,26 @@
           <div class="url-row">
             <label class="tls-toggle">
               <input type="checkbox" id="tls-local" aria-label="Toggle HTTPS for local">
-              <span class="tls-track">
-                <span class="tls-text tls-text-on">https</span>
-                <span class="tls-text tls-text-off">http</span>
-                <span class="tls-thumb"></span>
-              </span>
+              <span class="tls-label">https</span>
             </label>
-            <span class="domain" id="local-domain">://</span>
+            <span class="url-separator">://</span>
+            <input type="text" id="local-hostname" class="hostname-input"
+              autocomplete="off" spellcheck="false" aria-label="Local hostname">
+            <span class="url-separator">.</span>
           </div>
           <input type="text" id="local-tld" class="tld-input" placeholder="test" value="test"
             aria-label="Local top-level domain" autocomplete="off" spellcheck="false">
         </div>
       </div>
-      <button id="submit" type="button">
-        <span id="button-label">Go</span>
-        <svg viewBox="0 0 24 24" aria-hidden="true">
-          <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z" />
-        </svg>
-      </button>
+      <label class="option-row">
+        <input type="checkbox" id="navigate-on-save" checked>
+        <span data-i18n="labelNavigateOnSave"></span>
+      </label>
+      <label class="option-row">
+        <input type="checkbox" id="close-on-save">
+        <span data-i18n="labelCloseOnSave"></span>
+      </label>
+      <button id="submit" type="button" data-i18n="buttonSave"></button>
       <p class="error-message" id="error" role="alert" aria-live="assertive"></p>
     </section>
 
@@ -643,13 +770,12 @@
           <div class="url-row">
             <label class="tls-toggle">
               <input type="checkbox" id="edit-tls-production" checked aria-label="Toggle HTTPS for production">
-              <span class="tls-track">
-                <span class="tls-text tls-text-on">https</span>
-                <span class="tls-text tls-text-off">http</span>
-                <span class="tls-thumb"></span>
-              </span>
+              <span class="tls-label">https</span>
             </label>
-            <span class="domain" id="edit-prod-domain">://</span>
+            <span class="url-separator">://</span>
+            <input type="text" id="edit-prod-hostname" class="hostname-input"
+              autocomplete="off" spellcheck="false" aria-label="Production hostname">
+            <span class="url-separator">.</span>
           </div>
           <input type="text" id="edit-tld" class="tld-input" placeholder="com" aria-label="Production top-level domain"
             autocomplete="off" spellcheck="false">
@@ -661,13 +787,12 @@
           <div class="url-row">
             <label class="tls-toggle">
               <input type="checkbox" id="edit-tls-local" aria-label="Toggle HTTPS for local">
-              <span class="tls-track">
-                <span class="tls-text tls-text-on">https</span>
-                <span class="tls-text tls-text-off">http</span>
-                <span class="tls-thumb"></span>
-              </span>
+              <span class="tls-label">https</span>
             </label>
-            <span class="domain" id="edit-local-domain">://</span>
+            <span class="url-separator">://</span>
+            <input type="text" id="edit-local-hostname" class="hostname-input"
+              autocomplete="off" spellcheck="false" aria-label="Local hostname">
+            <span class="url-separator">.</span>
           </div>
           <input type="text" id="edit-local-tld" class="tld-input" placeholder="test"
             aria-label="Local top-level domain" autocomplete="off" spellcheck="false">
