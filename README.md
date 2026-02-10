@@ -7,9 +7,13 @@ A Chrome extension for developers who work with local development servers. Insta
 - **One-click toggle** — Click the extension icon to instantly switch between local and production
 - **Preserves your path** — `/dashboard?tab=settings` stays intact when switching domains
 - **Configurable TLDs** — Use any local TLD (`.test`, `.local`, `.dev`, etc.)
+- **Hostname divergence** — Use completely different hostnames per environment (e.g., `app.example.com` and `dev.internal.test`)
 - **Protocol control** — Toggle HTTPS independently for local and production
-- **Remembers settings** — Configuration is saved per-domain
+- **Side panel** — Configure domains from a persistent side panel with inline-editable URL fields
+- **Multi-domain management** — View, edit, and navigate between all configured domains from the side panel
+- **Remembers settings** — Configuration is saved per-domain and synced across devices
 - **Badge indicator** — Shows "L" when you're on a local domain
+- **Available in 9 languages** — English, German, Spanish, French, Italian, Japanese, Korean, Portuguese, and Chinese
 
 ## Installation
 
@@ -24,19 +28,21 @@ Go to the [Chrome Web Store](https://chromewebstore.google.com/detail/local-togg
 **First time setup from local domain:**
 1. Visit any URL in your local development environment
 2. Click the extension icon
-3. Populate the production domain's TLD in the configuration menu that appears under the extension icon
-4. Click go to production
+3. Populate the production domain's TLD in the side panel that appears
+4. Click Save
 
 **Configuring settings:**
-- Right-click the extension icon → "Configure settings for this domain"
-- Adjust TLDs and HTTPS settings as needed
+- Right-click the extension icon → "Configure Domains" to open the side panel
+- Edit the protocol, hostname, or TLD inline for each environment
+- To use different hostnames per environment, simply edit the hostname fields to differ
 
-**Clearing saved settings:**
-- Right-click the extension icon → "Clear saved production TLD for this domain"
+**Managing other domains:**
+- Previously configured domains appear in the "Other domains" list
+- Click the arrow icon to navigate to a domain, or the pencil icon to edit its settings
 
 ## How It Works
 
-The extension extracts the base domain from your current URL and swaps the TLD while preserving the path, query parameters, and hash. Settings are stored per-domain using Chrome's storage API.
+The extension extracts the base domain from your current URL and swaps the TLD while preserving the path, query parameters, and hash. When hostname divergence is configured, the full hostname is swapped as well. Settings are stored per-domain using Chrome's storage API and synced across devices.
 
 ## Permissions
 
@@ -44,6 +50,7 @@ The extension extracts the base domain from your current URL and swaps the TLD w
 - `storage` — Save your TLD preferences
 - `tabs` — Navigate to the swapped URL
 - `contextMenus` — Right-click menu options
+- `sidePanel` — Configuration side panel
 
 ## Contributing
 
@@ -58,7 +65,7 @@ See instructions for [Loading an unpacked extension](https://developer.chrome.co
 Create a release in GitHub. Easiest way to do this is with the gh cli.
 
 ```bash
-gh release create v1.2.0 --title "v1.2.0" --notes "Release notes here"
+gh release create v2.1.0 --title "v2.1.0" --notes "Release notes here"
 ```
 
 (assuming you have permission, which you probably don't) The GitHub Action will automatically update the manifest version, package the extension, and publish to the Chrome Web Store.

@@ -70,5 +70,26 @@
   },
   "badgeActive": {
     "message": "Attivo"
+  },
+  "ariaToggleHttpsProduction": {
+    "message": "Attiva HTTPS per la produzione"
+  },
+  "ariaToggleHttpsLocal": {
+    "message": "Attiva HTTPS per il locale"
+  },
+  "ariaProductionHostname": {
+    "message": "Nome host di produzione"
+  },
+  "ariaLocalHostname": {
+    "message": "Nome host locale"
+  },
+  "ariaProductionTld": {
+    "message": "Dominio di primo livello di produzione"
+  },
+  "ariaLocalTld": {
+    "message": "Dominio di primo livello locale"
+  },
+  "ariaClose": {
+    "message": "Chiudi"
   }
 }

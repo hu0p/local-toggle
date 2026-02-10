@@ -70,5 +70,26 @@
   },
   "badgeActive": {
     "message": "현재"
+  },
+  "ariaToggleHttpsProduction": {
+    "message": "프로덕션 HTTPS 전환"
+  },
+  "ariaToggleHttpsLocal": {
+    "message": "로컬 HTTPS 전환"
+  },
+  "ariaProductionHostname": {
+    "message": "프로덕션 호스트 이름"
+  },
+  "ariaLocalHostname": {
+    "message": "로컬 호스트 이름"
+  },
+  "ariaProductionTld": {
+    "message": "프로덕션 최상위 도메인"
+  },
+  "ariaLocalTld": {
+    "message": "로컬 최상위 도메인"
+  },
+  "ariaClose": {
+    "message": "닫기"
   }
 }

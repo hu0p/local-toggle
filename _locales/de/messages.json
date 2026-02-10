@@ -70,5 +70,26 @@
   },
   "badgeActive": {
     "message": "Aktiv"
+  },
+  "ariaToggleHttpsProduction": {
+    "message": "HTTPS für Produktion umschalten"
+  },
+  "ariaToggleHttpsLocal": {
+    "message": "HTTPS für lokal umschalten"
+  },
+  "ariaProductionHostname": {
+    "message": "Produktions-Hostname"
+  },
+  "ariaLocalHostname": {
+    "message": "Lokaler Hostname"
+  },
+  "ariaProductionTld": {
+    "message": "Produktions-Top-Level-Domain"
+  },
+  "ariaLocalTld": {
+    "message": "Lokale Top-Level-Domain"
+  },
+  "ariaClose": {
+    "message": "Schließen"
   }
 }

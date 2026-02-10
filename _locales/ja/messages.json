@@ -70,5 +70,26 @@
   },
   "badgeActive": {
     "message": "現在"
+  },
+  "ariaToggleHttpsProduction": {
+    "message": "本番のHTTPSを切り替え"
+  },
+  "ariaToggleHttpsLocal": {
+    "message": "ローカルのHTTPSを切り替え"
+  },
+  "ariaProductionHostname": {
+    "message": "本番ホスト名"
+  },
+  "ariaLocalHostname": {
+    "message": "ローカルホスト名"
+  },
+  "ariaProductionTld": {
+    "message": "本番トップレベルドメイン"
+  },
+  "ariaLocalTld": {
+    "message": "ローカルトップレベルドメイン"
+  },
+  "ariaClose": {
+    "message": "閉じる"
   }
 }

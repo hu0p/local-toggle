@@ -70,5 +70,26 @@
   },
   "badgeActive": {
     "message": "当前"
+  },
+  "ariaToggleHttpsProduction": {
+    "message": "切换生产环境HTTPS"
+  },
+  "ariaToggleHttpsLocal": {
+    "message": "切换本地环境HTTPS"
+  },
+  "ariaProductionHostname": {
+    "message": "生产环境主机名"
+  },
+  "ariaLocalHostname": {
+    "message": "本地环境主机名"
+  },
+  "ariaProductionTld": {
+    "message": "生产环境顶级域名"
+  },
+  "ariaLocalTld": {
+    "message": "本地环境顶级域名"
+  },
+  "ariaClose": {
+    "message": "关闭"
   }
 }

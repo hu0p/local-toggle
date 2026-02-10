@@ -94,5 +94,33 @@
   "badgeActive": {
     "message": "Active",
     "description": "Badge shown next to the field label for the environment the user is currently on"
+  },
+  "ariaToggleHttpsProduction": {
+    "message": "Toggle HTTPS for production",
+    "description": "Aria label for the HTTPS toggle on the production environment"
+  },
+  "ariaToggleHttpsLocal": {
+    "message": "Toggle HTTPS for local",
+    "description": "Aria label for the HTTPS toggle on the local environment"
+  },
+  "ariaProductionHostname": {
+    "message": "Production hostname",
+    "description": "Aria label for the production hostname input"
+  },
+  "ariaLocalHostname": {
+    "message": "Local hostname",
+    "description": "Aria label for the local hostname input"
+  },
+  "ariaProductionTld": {
+    "message": "Production top-level domain",
+    "description": "Aria label for the production TLD input"
+  },
+  "ariaLocalTld": {
+    "message": "Local top-level domain",
+    "description": "Aria label for the local TLD input"
+  },
+  "ariaClose": {
+    "message": "Close",
+    "description": "Aria label for close buttons"
   }
 }

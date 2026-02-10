@@ -6,6 +6,10 @@ document.querySelectorAll('[data-i18n]').forEach((el) => {
   el.textContent = chrome.i18n.getMessage(el.dataset.i18n);
 });
 
+document.querySelectorAll('[data-i18n-aria]').forEach((el) => {
+  el.setAttribute('aria-label', chrome.i18n.getMessage(el.dataset.i18nAria));
+});
+
 const stripLeadingDot = (value) => value.replace(/^\.+/, '');
 
 const DOMAIN_TAIL_LENGTH = 8;
