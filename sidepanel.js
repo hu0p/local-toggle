@@ -412,5 +412,4 @@ chrome.tabs.onActivated.addListener(() => {
 });
 
 // --- Initial load ---
-
 loadAndRender(true);
