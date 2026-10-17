@@ -29,8 +29,8 @@
   "errorLocalTldRequired": {
     "message": "로컬 TLD가 필요합니다"
   },
-  "errorTldsMustDiffer": {
-    "message": "TLD는 서로 달라야 합니다"
+  "errorUrlsMustDiffer": {
+    "message": "프로덕션 URL과 로컬 URL은 서로 달라야 합니다"
   },
   "errorHostnameRequired": {
     "message": "호스트 이름은 필수입니다"
@@ -39,7 +39,7 @@
     "message": "이 페이지에서는 Local Toggle을 사용할 수 없습니다."
   },
   "loading": {
-    "message": "로딩 중\u2026"
+    "message": "로딩 중…"
   },
   "headingCurrentDomain": {
     "message": "현재 도메인"

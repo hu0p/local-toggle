@@ -7,7 +7,7 @@ A Chrome extension for developers who work with local development servers. Insta
 - **One-click toggle** — Click the extension icon to instantly switch between local and production
 - **Preserves your path** — `/dashboard?tab=settings` stays intact when switching domains
 - **Configurable TLDs** — Use any local TLD (`.test`, `.local`, `.dev`, etc.)
-- **Hostname divergence** — Use completely different hostnames per environment (e.g., `app.example.com` and `dev.internal.test`)
+- **Hostname divergence** — Use completely different hostnames per environment (e.g., `app.example.com` and `dev.internal.test`, or a subdomain on the same TLD like `icepickr.com` and `dev.icepickr.com`)
 - **Protocol control** — Toggle HTTPS independently for local and production
 - **Side panel** — Configure domains from a persistent side panel with inline-editable URL fields
 - **Multi-domain management** — View, edit, and navigate between all configured domains from the side panel

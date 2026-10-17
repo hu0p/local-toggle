@@ -29,8 +29,8 @@
   "errorLocalTldRequired": {
     "message": "TLD locale richiesto"
   },
-  "errorTldsMustDiffer": {
-    "message": "I TLD devono essere diversi"
+  "errorUrlsMustDiffer": {
+    "message": "Gli URL di produzione e locale devono essere diversi"
   },
   "errorHostnameRequired": {
     "message": "Il nome host è obbligatorio"
@@ -39,7 +39,7 @@
     "message": "Local Toggle non funziona su questa pagina."
   },
   "loading": {
-    "message": "Caricamento\u2026"
+    "message": "Caricamento…"
   },
   "headingCurrentDomain": {
     "message": "Dominio attuale"

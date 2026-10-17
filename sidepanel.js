@@ -1,5 +1,5 @@
 import { DEFAULT_LOCAL_TLD, HTTPS, HTTP } from './lib/constants.js';
-import { extractTld, getDomainBase, buildSwappedUrl, isRestrictedBrowserPage } from './lib/domain.js';
+import { extractTld, getDomainBase, buildSwappedUrl, isRestrictedBrowserPage, isLocalHostname, toFullHostname } from './lib/domain.js';
 import { getDomainSettings, saveDomainSettings, removeDomainSettings, getAllDomainConfigs, getAppConfig, saveAppConfig } from './lib/storage.js';
 
 document.querySelectorAll('[data-i18n]').forEach((el) => {
@@ -332,7 +332,7 @@ const loadAndRender = async (initial = false) => {
   const savedProtocol = settings?.prodProtocol;
   const savedLocalProtocol = settings?.localProtocol;
   const savedLocalTld = settings?.localTld ?? DEFAULT_LOCAL_TLD;
-  state.isOnLocal = currentTld === savedLocalTld;
+  state.isOnLocal = isLocalHostname(hostname, settings);
 
   prodBadge.style.visibility = state.isOnLocal ? 'hidden' : 'visible';
   localBadge.style.visibility = state.isOnLocal ? 'visible' : 'hidden';
@@ -375,7 +375,9 @@ const loadAndRender = async (initial = false) => {
   getAllDomainConfigs().then((allConfigs) => {
     if (generation !== renderGeneration) return;
     const otherConfigs = allConfigs.filter(
-      (config) => config.domainBase !== state.domainBase
+      (config) =>
+        config.domainBase !== state.domainBase &&
+        config.settings.localHostname !== state.domainBase
     );
     renderDomainList(otherConfigs);
   });
@@ -437,8 +439,8 @@ const handleSubmit = async () => {
   const newProdTld = `.${prodTld}`;
   const newLocalTld = `.${localTld}`;
 
-  if (newProdTld === newLocalTld) {
-    showFormError(i18n('errorTldsMustDiffer'), localInputRow, errorMessage);
+  if (toFullHostname(prodHostname, newProdTld) === toFullHostname(localHostname, newLocalTld)) {
+    showFormError(i18n('errorUrlsMustDiffer'), localInputRow, errorMessage);
     return;
   }
 
@@ -447,7 +449,7 @@ const handleSubmit = async () => {
   const navigateOnSave = navigateCheckbox.checked;
   const closeOnSave = closeCheckbox.checked;
 
-  const { domainBase, isOnLocal, activeTab } = state;
+  const { domainBase, activeTab } = state;
 
   const settings = {
     prodTld: newProdTld,
@@ -460,6 +462,8 @@ const handleSubmit = async () => {
     settings.prodHostname = prodHostname;
     settings.localHostname = localHostname;
   }
+
+  const isOnLocal = isLocalHostname(new URL(activeTab.url).hostname, settings);
 
   const promises = [
     saveDomainSettings(domainBase, settings),
@@ -557,8 +561,8 @@ editSaveBtn.addEventListener('click', async () => {
   const newProdTld = `.${prodTld}`;
   const newLocalTld = `.${localTld}`;
 
-  if (newProdTld === newLocalTld) {
-    showFormError(i18n('errorTldsMustDiffer'), editLocalInputRow, editErrorMessage);
+  if (toFullHostname(editProdHostname, newProdTld) === toFullHostname(editLocalHostname, newLocalTld)) {
+    showFormError(i18n('errorUrlsMustDiffer'), editLocalInputRow, editErrorMessage);
     return;
   }
 

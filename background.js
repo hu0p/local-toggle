@@ -7,7 +7,7 @@ import {
   EMPTY_BADGE_TEXT,
   CONFIGURE_MENU_ID,
 } from './lib/constants.js';
-import { extractTld, getDomainBase, buildSwappedUrl, isRestrictedBrowserPage } from './lib/domain.js';
+import { extractTld, getDomainBase, buildSwappedUrl, isRestrictedBrowserPage, isLocalHostname } from './lib/domain.js';
 import { getDomainSettings, saveDomainSettings } from './lib/storage.js';
 
 const updateTabState = async (tabId, url) => {
@@ -16,8 +16,7 @@ const updateTabState = async (tabId, url) => {
     const tld = extractTld(hostname);
     const domainBase = getDomainBase(hostname, tld);
     const settings = await getDomainSettings(domainBase);
-    const localTld = settings?.localTld ?? DEFAULT_LOCAL_TLD;
-    const isLocal = tld === localTld;
+    const isLocal = isLocalHostname(hostname, settings);
 
     chrome.action.setBadgeText({ tabId, text: isLocal ? LOCAL_BADGE_TEXT : EMPTY_BADGE_TEXT });
     chrome.action.setBadgeBackgroundColor({ tabId, color: LOCAL_BADGE_COLOR });
@@ -45,7 +44,7 @@ const handleActionClick = async (tab) => {
     if (!settings) return;
 
     const localTld = settings.localTld ?? DEFAULT_LOCAL_TLD;
-    const isOnLocal = tld === localTld;
+    const isOnLocal = isLocalHostname(hostname, settings);
     const prodHostname = settings.prodHostname ?? domainBase;
     const localHostname = settings.localHostname ?? domainBase;
 

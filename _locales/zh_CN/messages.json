@@ -29,8 +29,8 @@
   "errorLocalTldRequired": {
     "message": "本地TLD为必填项"
   },
-  "errorTldsMustDiffer": {
-    "message": "TLD必须不同"
+  "errorUrlsMustDiffer": {
+    "message": "生产环境URL和本地URL必须不同"
   },
   "errorHostnameRequired": {
     "message": "主机名为必填项"
@@ -39,7 +39,7 @@
     "message": "Local Toggle 无法在此页面上使用。"
   },
   "loading": {
-    "message": "加载中\u2026"
+    "message": "加载中…"
   },
   "headingCurrentDomain": {
     "message": "当前域名"

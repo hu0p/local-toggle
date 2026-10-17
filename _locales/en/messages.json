@@ -39,9 +39,9 @@
     "message": "Local TLD is required",
     "description": "Error when local TLD is empty"
   },
-  "errorTldsMustDiffer": {
-    "message": "TLDs must be different",
-    "description": "Error when production and local TLDs are the same"
+  "errorUrlsMustDiffer": {
+    "message": "Production and local URLs must be different",
+    "description": "Error when the production and local URLs resolve to the same host"
   },
   "errorHostnameRequired": {
     "message": "Hostname is required",
